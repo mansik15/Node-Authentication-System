@@ -1,35 +1,58 @@
-🚀 Node Authentication API
+# 🚀 Node Authentication API
 
-A simple and secure REST API built with Node.js, Express, MongoDB, and JWT Authentication.
+A simple and secure REST API built with **Node.js**, **Express**, **MongoDB**, and **JWT Authentication**.
 
-This project demonstrates how to implement:
+This project demonstrates:
 
-User Registration (Signup)
+- User Registration (Signup)
+- User Login
+- Password Hashing using bcrypt
+- JWT Token Generation
+- Protected Routes
+- MongoDB integration with Mongoose
+- Environment variable security
 
-User Login
+---
 
-Password Hashing (bcrypt)
+## 📌 Tech Stack
 
-JWT Token Generation
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- JSON Web Token (JWT)
+- bcrypt
+- dotenv
+- ESLint
 
-Protected Routes
+---
 
-MongoDB Connection using Mongoose
+## 🛡 Security Features
 
-Environment Variable Security
+- Password hashing using bcrypt
+- Token-based authentication using JWT
+- Environment variables using dotenv
+- Middleware-based route protection
+- Basic ESLint configuration
 
-📌 Tech Stack
+---
 
-Node.js
+## 🧪 Linting
 
-Express.js
+Run ESLint:
 
-MongoDB (Mongoose)
+```bash
+npx eslint .
+```
 
-JWT (jsonwebtoken)
+---
 
-bcrypt
+## 🚀 Future Improvements
 
-dotenv
-
-ESLint
+- Refresh Token implementation
+- Role-Based Access Control (RBAC)
+- Input validation (Joi / express-validator)
+- Rate limiting
+- Logging (Winston / Morgan)
+- Swagger API documentation
+- Docker support
+- CI/CD integration

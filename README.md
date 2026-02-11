@@ -1,28 +1,40 @@
-# 🚀 Node Authentication API
+# 🚀 Fullstack Authentication App
 
-A simple and secure REST API built with **Node.js**, **Express**, **MongoDB**, and **JWT Authentication**.
+A fullstack authentication application built using:
 
-This project demonstrates:
+- ⚛️ React (Vite) – Frontend
+- 🟢 Node.js + Express – Backend
+- 🍃 MongoDB Atlas – Database
+- 🔐 bcrypt – Password Hashing
 
-- User Registration (Signup)
-- User Login
-- Password Hashing using bcrypt
-- JWT Token Generation
-- Protected Routes
-- MongoDB integration with Mongoose
-- Environment variable security
+This project demonstrates a complete user signup flow with secure password storage and frontend-backend communication.
 
 ---
 
-## 📌 Tech Stack
+## 🛠 Tech Stack
 
+### Frontend
+- React (Vite)
+- Axios
+- JavaScript (ES6+)
+
+### Backend
 - Node.js
 - Express.js
-- MongoDB (Mongoose)
-- JSON Web Token (JWT)
+- MongoDB Atlas
+- Mongoose
 - bcrypt
+- CORS
 - dotenv
-- ESLint
+
+---
+
+# ⚙️ Backend Setup
+
+Navigate to backend folder:
+
+```bash
+cd node-demo
 
 ---
 
@@ -43,6 +55,19 @@ Run ESLint:
 ```bash
 npx eslint .
 ```
+
+---
+
+## Concepts Covered
+
+- REST API development
+- Express middleware
+- CORS configuration
+- MongoDB Atlas connection
+- Password hashing
+- Environment variables
+- Frontend-backend integration
+- Error handling
 
 ---
 

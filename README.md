@@ -29,11 +29,10 @@ This project demonstrates a complete user signup flow with secure password stora
 
 ---
 
-# ⚙️ Backend Setup
+## ⚙️ Backend Setup
 
 Navigate to backend folder:
 
-```bash
 cd node-demo
 
 ---
@@ -75,9 +74,7 @@ npx eslint .
 
 - Refresh Token implementation
 - Role-Based Access Control (RBAC)
-- Input validation (Joi / express-validator)
+- Input validation
 - Rate limiting
-- Logging (Winston / Morgan)
-- Swagger API documentation
 - Docker support
 - CI/CD integration

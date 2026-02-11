@@ -5,11 +5,12 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User');
-const cors = require("cors");
-app.use(cors());
 
 const app = express();
 app.use(express.json());
+
+const cors = require("cors");
+app.use(cors());
 
 // CONFIG
 const PORT = process.env.PORT;
@@ -49,8 +50,9 @@ app.post('/signup', async (req, res) => {
     });
 
   } catch (err) {
-    res.status(500).json({ message: 'Server error' });
-  }
+  console.error("Signup error:", err);
+  res.status(500).json({ message: "Server error", error: err.message });
+}
 });
 
 /* ---------------- LOGIN API ---------------- */

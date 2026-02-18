@@ -12,4 +12,10 @@ router.post("/login", authController.login);
 
 router.get("/profile", authenticateToken, authController.getProfile);
 
+router.post("/refresh", authController.refreshToken);
+
+router.post("/logout", authController.logout);
+
+console.log(authController);
+
 module.exports = router;

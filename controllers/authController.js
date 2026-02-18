@@ -1,10 +1,19 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { validationResult } = require("express-validator");
 
 /* SIGNUP */
 exports.signup = async (req, res) => {
   try {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array()
+      });
+    }
+    
     const { email, password } = req.body;
 
     if (!email || !password)
@@ -35,56 +44,51 @@ exports.signup = async (req, res) => {
 /* LOGIN */
 exports.login = async (req, res) => {
   try {
+    // 1️⃣ Validate input first
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { email, password } = req.body;
 
+    // 2️⃣ Check if user exists
     const user = await User.findOne({ email });
-
-    if (!user)
+    if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
+    }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch)
+    // 3️⃣ Compare password
+    const isValidPassword = await bcrypt.compare(password, user.password);
+    if (!isValidPassword) {
       return res.status(401).json({ message: "Invalid credentials" });
+    }
 
-    // ACCESS TOKEN (short life)
-  const accessToken = jwt.sign(
-    { userId: user._id },
-    process.env.JWT_SECRET,
-    { expiresIn: "15m" }
-  );
+    // 4️⃣ Generate tokens
+    const accessToken = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "15m" }
+    );
 
-  // REFRESH TOKEN (long life)
-  const refreshToken = jwt.sign(
-    { userId: user._id },
-    process.env.JWT_REFRESH_SECRET,
-    { expiresIn: "7d" }
-  );
+    const refreshToken = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_REFRESH_SECRET,
+      { expiresIn: "7d" }
+    );
 
-  // Save refresh token in DB
-  user.refreshToken = refreshToken;
-  await user.save();
+    // 5️⃣ Save refresh token
+    user.refreshToken = refreshToken;
+    await user.save();
 
-  res.json({
-    accessToken,
-    refreshToken
-  });
+    return res.status(200).json({ accessToken, refreshToken });
 
-    // const token = jwt.sign(
-    //   { userId: user._id, email: user.email },
-    //   process.env.JWT_SECRET,
-    //   { expiresIn: "1h" }
-    // );
-
-    // res.json({
-    //   message: "Login successful",
-    //   token,
-    // });
-
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    console.error("Login Error:", error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
+
 
 /* PROFILE */
 exports.getProfile = async (req, res) => {
